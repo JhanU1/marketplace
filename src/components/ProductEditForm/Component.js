@@ -10,12 +10,14 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import Navbar from "../Navbar";
-import { saveProduct } from "../../utils/products";
+import { editProduct } from "../../utils/products";
 import { getCurrentUser } from "../../utils/auth";
 import { getProductById } from "../../utils/master";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function Product() {
+  const navigate = useNavigate();
   const { productId } = useParams();
   console.log(productId);
   const { name, image, description, price, quantity } =
@@ -42,8 +44,10 @@ export default function Product() {
       values.price &&
       values.quantity
     ) {
-      saveProduct(values);
+      console.log("AAAAAA");
+      console.log(editProduct(productId, values));
       alert("Product updated");
+      navigate("/products/user/" + getCurrentUser()?.id);
     } else {
       alert("Please fill all fields");
     }
@@ -85,7 +89,7 @@ export default function Product() {
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-username"
-                    value={values.username}
+                    value={values.name}
                     onChange={handleChange("name")}
                     label="Nombre"
                   />
@@ -98,7 +102,7 @@ export default function Product() {
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-username"
-                    value={values.username}
+                    value={values.image}
                     onChange={handleChange("image")}
                     label="Link Imagen"
                   />
@@ -111,7 +115,7 @@ export default function Product() {
                   </InputLabel>
                   <OutlinedInput
                     id="outlined-adornment-username"
-                    value={values.username}
+                    value={values.description}
                     onChange={handleChange("description")}
                     label="Descripción"
                   />
@@ -122,6 +126,7 @@ export default function Product() {
                   id="outlined-number"
                   label="Cantidad Disponible"
                   type="number"
+                  value={values.quantity}
                   onChange={handleChange("quantity")}
                 />
               </Box>
@@ -130,6 +135,7 @@ export default function Product() {
                   id="outlined-number"
                   label="Precio Por unidad"
                   type="number"
+                  value={values.price}
                   onChange={handleChange("price")}
                 />
               </Box>

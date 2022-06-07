@@ -21,3 +21,13 @@ export const getAllProducts = () => {
 export const getProductsBySearch = (search) => {
   return getAllProducts().filter((product) => product.name.includes(search))
 }
+
+export const editProduct = (productId, product) => {
+  const productIndex = data.products.findIndex((product) => product.id == productId);
+  data.products[productIndex] = {
+    ...product,
+    id: +productId,
+  }
+  console.log(data.products);
+  return data.products[productIndex];
+}
