@@ -5,7 +5,7 @@ export const getSellerUsers = () => {
 };
 
 export const getProductsByUserId = (id) => {
-  return data.products.filter((product) => `${product.user_id}` === id);
+  return data.products.filter((product) => product.userId == id);
 };
 
 export const getProductById = (id) => {
