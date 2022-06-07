@@ -81,7 +81,7 @@ const data = {
       price: "1000",
       quantity: "2",
       date: "2020-01-01",
-      userName: "Juan",
+      user_id: 1,
     },
   ],
   carts: [],

@@ -2,6 +2,7 @@ import Login from "./pages/Login";
 import ProductsGrid from "./components/ProductGrid/ProductsGrid";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Register from "./pages/Register";
+import ProductForm from "./components/ProductForm";
 import { getCurrentUser } from "./utils/auth";
 
 import {
@@ -23,7 +24,7 @@ function App() {
 
         <Route path="/products" element={<ProductsGrid />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
-
+        <Route path="/products/new" element={<ProductForm />} />
         <Route path="/" element={<Navigate to={isLogged ? "/products" : "/login"} replace />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>

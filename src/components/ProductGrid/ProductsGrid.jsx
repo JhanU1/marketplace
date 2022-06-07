@@ -5,6 +5,7 @@ import { Pagination } from "../Pagination";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./ProductsGrid.module.css";
 import Navbar from "../Navbar";
+import { getAllProducts, getProductsBySearch } from "../../utils/products";
 
 export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
@@ -15,17 +16,12 @@ export default function ProductsGrid() {
   const search = location.search.split("=")[1];
 
   useEffect(() => {
-    const fetchProducts = () => {
-      const searchUrl = search
-        ? "https://dummyjson.com/products/search?q=" + search
-        : "https://dummyjson.com/products";
-      return fetch(searchUrl)
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data.products);
-        });
-    };
-    fetchProducts();
+    if (!search) {
+      setProducts(getAllProducts());
+    } else {
+      console.log(search);
+      setProducts(getProductsBySearch(search));
+    }
   }, [search]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -48,7 +44,7 @@ export default function ProductsGrid() {
       <ProductSearch />
       <ul className={styles.productsGrid}>
         {currentProducts.map((product) => (
-          <ProductCard key={product.title} {...product} />
+          <ProductCard key={product.id} {...product} />
         ))}
       </ul>
       <Pagination

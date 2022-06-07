@@ -10,33 +10,35 @@ import { red } from "@mui/material/colors";
 import CartIcon from "@mui/icons-material/AddShoppingCart";
 
 import { Link } from "react-router-dom";
-
+import { getUserById } from "../../utils/users";
 export function ProductCard({
-  owner = "Owner",
+  user_id = 1,
   id,
-  title,
-  thumbnail,
-  price,
+  name,
+  image,
   description,
-  stock,
+  price,
+  quantity,
 }) {
+  const nameOfUser = getUserById(user_id)?.name;
+
   return (
     <Card sx={{ maxWidth: 345, height: 1 }}>
       <Link to={"/products/" + id}>
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {owner?.charAt(0).toUpperCase()}
+              {nameOfUser?.charAt(0).toUpperCase()}
             </Avatar>
           }
-          title={owner}
+          title={nameOfUser}
           // subheader={date.toString()}
         />
-        <CardMedia component="img" image={thumbnail} alt="Paella dish" />
+        <CardMedia component="img" image={image} alt="Paella dish" />
       </Link>
       <CardContent>
         <Typography variant="h5" color="text.secondary">
-          {title}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {description}
@@ -44,7 +46,7 @@ export function ProductCard({
         <Typography variant="body2" sx={{ mt: 3 }}>
           Precio: ${price}
         </Typography>
-        <Typography variant="body2">Cantidad disponible: {stock}</Typography>
+        <Typography variant="body2">Cantidad disponible: {quantity}</Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="Agregar al carrito">

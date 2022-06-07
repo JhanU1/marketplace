@@ -9,29 +9,49 @@ import {
   TextField,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import Navbar from "../Navbar";
+import { saveProduct } from "../../utils/products";
+import { useNavigate } from "react-router-dom";
+import { getCurrentUser } from "../../utils/auth";
 
 export default function Product({
-  description = "",
-  image = "",
   name = "",
+  image = "",
+  description = "",
   price = "",
   quantity = "",
 }) {
+  const navigate = useNavigate();
   const [values, setValues] = React.useState({
     description,
     image,
     name,
     price,
     quantity,
+    user_id: getCurrentUser()?.id || 1,
   });
   const colorBgLogin = grey[300];
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
   const actionButton = () => {
-  
+    // check if all fields are filled
+    if (
+      values.name &&
+      values.description &&
+      values.image &&
+      values.price &&
+      values.quantity
+    ) {
+      saveProduct(values);
+      navigate("/products");
+    } else {
+      alert("Please fill all fields");
+    }
   }
   return (
+    <>
+    <Navbar />
     <Grid
       container
       spacing={0}
@@ -56,11 +76,11 @@ export default function Product({
             align="center"
             sx={{ bgcolor: colorBgLogin, py: 0.5, color: "text.secondary" }}
           >
-            <h1 align="center">Editar Producto</h1>
+            <h1 align="center">Info Producto</h1>
           </Box>
           <Box sx={{ mx: 9 }}>
             <Box>
-              <FormControl fullWidth sx={{ my: 4 }}>
+              <FormControl required fullWidth sx={{ my: 4 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Nombre
                 </InputLabel>
@@ -73,7 +93,7 @@ export default function Product({
               </FormControl>
             </Box>
             <Box>
-              <FormControl fullWidth sx={{ mb: 4 }}>
+              <FormControl required fullWidth sx={{ mb: 4 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Link Imagen
                 </InputLabel>
@@ -86,7 +106,7 @@ export default function Product({
               </FormControl>
             </Box>
             <Box>
-              <FormControl fullWidth sx={{ mb: 4 }}>
+              <FormControl required fullWidth sx={{ mb: 4 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Descripción
                 </InputLabel>
@@ -119,12 +139,13 @@ export default function Product({
                 variant="contained"
                 onClick={actionButton}
               >
-                Guardar 
+                Guardar
               </Button>
             </div>
           </Box>
         </Box>
       </Grid>
     </Grid>
+    </>
   );
 }

@@ -9,7 +9,7 @@ export function ProductSearch() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate("/products?search?q=" + searchText)
+        navigate("/products?search=" + searchText)
     }
 
     return (
