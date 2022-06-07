@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import ProductForm from "./components/ProductForm";
 import { getCurrentUser } from "./utils/auth";
 import Cart from "./components/Cart/Cart";
+import SellerUsers from "./pages/SellerUsers";
+import UserProducts from "./pages/UserProducts";
 import {
   BrowserRouter,
   Routes,
@@ -25,7 +27,9 @@ function App() {
         <Route path="/products" element={<ProductsGrid />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
         <Route path="/products/new" element={<ProductForm />} />
-
+        <Route path="/products/edit/:productId" element={<ProductForm />} />
+        <Route path="/products/user/:user_id" element={<UserProducts/>} />
+        <Route path="/master" element={<SellerUsers />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Navigate to={isLogged ? "/products" : "/login"} replace />} />
         <Route path="*" element={<Navigate replace to="/" />} />

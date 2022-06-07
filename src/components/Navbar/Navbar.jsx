@@ -7,21 +7,17 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { grey } from "@mui/material/colors";
 import { getCurrentUser } from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {logout} from "../../utils/auth.js";
 
 export default function Navbar() {
-  const auth = !!getCurrentUser();
+  const auth = getCurrentUser();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +25,11 @@ export default function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -46,7 +47,7 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Productos
           </Typography>
-          {auth && (
+          {!!auth && (
             <div>
               <Button
                 variant="contained"
@@ -88,8 +89,9 @@ export default function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                {auth.type==="seller" && (<MenuItem onClick={handleClose}>Mis Productos</MenuItem>) }
+                {auth.type==="admin" &&  (<MenuItem onClick={() => navigate("/master")}>Maestro de Productos</MenuItem>)}
+                <MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
               </Menu>
             </div>
           )}

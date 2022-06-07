@@ -4,6 +4,6 @@ export const getSellerUsers = () => {
   return data.users.filter((user) => user.type === "seller");
 };
 
-export const getProductByUserName = (username) => {
-  return data.products.filter((product) => product.owner === username);
+export const getProductsByUserId = (id) => {
+  return data.products.filter((product) => product.user_id === id);
 };

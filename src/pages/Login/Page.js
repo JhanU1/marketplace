@@ -121,7 +121,7 @@ const Page = () => {
               <Button
                 variant="contained"
                 onClick={actionButton}
-                sx={{ bgcolor: colorBgLogin }}
+             
               >
                 Iniciar sesión
               </Button>
