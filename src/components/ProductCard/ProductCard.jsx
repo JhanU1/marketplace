@@ -11,8 +11,10 @@ import CartIcon from "@mui/icons-material/AddShoppingCart";
 
 import { Link } from "react-router-dom";
 import { getUserById } from "../../utils/users";
+import { addProductToCart } from "../../utils/carts";
+import { getCurrentUser } from "../../utils/auth";
 export function ProductCard({
-  user_id = 1,
+  userId = 1,
   id,
   name,
   image,
@@ -20,7 +22,7 @@ export function ProductCard({
   price,
   quantity,
 }) {
-  const nameOfUser = getUserById(user_id)?.name;
+  const nameOfUser = getUserById(userId)?.name;
 
   return (
     <Card sx={{ maxWidth: 345, height: 1 }}>
@@ -32,7 +34,6 @@ export function ProductCard({
             </Avatar>
           }
           title={nameOfUser}
-          // subheader={date.toString()}
         />
         <CardMedia component="img" image={image} alt="Paella dish" />
       </Link>
@@ -49,27 +50,13 @@ export function ProductCard({
         <Typography variant="body2">Cantidad disponible: {quantity}</Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Agregar al carrito">
+        <IconButton
+          aria-label="Agregar al carrito"
+          onClick={() => addProductToCart(getCurrentUser().id, +id)}
+        >
           <CartIcon />
         </IconButton>
       </CardActions>
     </Card>
-
-    // <li className={styles.productCard}>
-    //   <Link to={"/products/" + product.id}>
-    //     <img
-    //       className={styles.productImage}
-    //       width={230}
-    //       height={200}
-    //       src={product.thumbnail}
-    //       alt={product.title}
-    //     ></img>
-    //     <hr></hr>
-    //     <div className={styles.productDetails}>
-    //       <div>{"$" + product.price}</div>
-    //       <div>{"Rating: " + product.rating}</div>
-    //     </div>
-    //   </Link>
-    // </li>
   );
 }

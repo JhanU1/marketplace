@@ -28,7 +28,7 @@ export default function Product({
     name,
     price,
     quantity,
-    user_id: getCurrentUser()?.id || 1,
+    userId: getCurrentUser()?.id || 1,
   });
   const colorBgLogin = grey[300];
   const handleChange = (prop) => (event) => {

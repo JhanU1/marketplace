@@ -15,6 +15,7 @@ import Menu from "@mui/material/Menu";
 import { grey } from "@mui/material/colors";
 import { getCurrentUser } from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function Navbar() {
   const auth = !!getCurrentUser();
@@ -47,7 +48,21 @@ export default function Navbar() {
           </Typography>
           {auth && (
             <div>
-              <Button variant="contained" onClick={() => navigate('/products/new')}>Crear Producto</Button>
+              <Button
+                variant="contained"
+                onClick={() => navigate("/products/new")}
+              >
+                Crear Producto
+              </Button>
+              <IconButton
+                size="large"
+                aria-label="shopping cart"
+                aria-haspopup="true"
+                onClick={() => navigate("/cart")}
+                color="inherit"
+              >
+                <ShoppingCartIcon />
+              </IconButton>
               <IconButton
                 size="large"
                 aria-label="account of current user"
