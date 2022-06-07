@@ -20,7 +20,7 @@ export default function Product() {
   const navigate = useNavigate();
   const { productId } = useParams();
   console.log(productId);
-  const { name, image, description, price, quantity } =
+  const { userId, name, image, description, price, quantity } =
     getProductById(productId);
   const [values, setValues] = React.useState({
     description,
@@ -28,7 +28,7 @@ export default function Product() {
     name,
     price,
     quantity,
-    userId: getCurrentUser()?.id || 1,
+    userId,
   });
   console.log(values);
   const colorBgLogin = grey[300];
@@ -47,7 +47,7 @@ export default function Product() {
       console.log("AAAAAA");
       console.log(editProduct(productId, values));
       alert("Product updated");
-      navigate("/products/user/" + getCurrentUser()?.id);
+      navigate("/products/user/" + userId);
     } else {
       alert("Please fill all fields");
     }
