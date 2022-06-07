@@ -4,6 +4,7 @@ import { ProductCard } from "../ProductCard/ProductCard";
 import { Pagination } from "../Pagination";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./ProductsGrid.module.css";
+import Navbar from "../Navbar";
 
 export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
@@ -38,6 +39,7 @@ export default function ProductsGrid() {
 
   return (
     <div>
+      <Navbar />
       <header>
         <Link to="/products">
           <h1 className={styles.title}>Catalogo</h1>
