@@ -1,5 +1,10 @@
 import data from "./data";
 
+export const getCurrentUser = () => {
+  const user = localStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+};
+
 export const login = (username, password) => {
   const user = data.users.find(
     (user) => user.username === username && user.password === password
