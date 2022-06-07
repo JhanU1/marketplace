@@ -5,12 +5,7 @@ import Register from "./pages/Register";
 import ProductForm from "./components/ProductForm";
 import { getCurrentUser } from "./utils/auth";
 import Cart from "./components/Cart/Cart";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   const isLogged = !!getCurrentUser();
@@ -18,7 +13,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
 
@@ -27,7 +21,10 @@ function App() {
         <Route path="/products/new" element={<ProductForm />} />
 
         <Route path="/cart" element={<Cart />} />
-        <Route path="/" element={<Navigate to={isLogged ? "/products" : "/login"} replace />} />
+        <Route
+          path="/"
+          element={<Navigate to={isLogged ? "/products" : "/login"} replace />}
+        />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </BrowserRouter>
