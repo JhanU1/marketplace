@@ -2,7 +2,6 @@ import Login from "./pages/Login";
 import ProductsGrid from "./components/ProductGrid/ProductsGrid";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Register from "./pages/Register";
-import Product from "./components/Product";
 import { getCurrentUser } from "./utils/auth";
 
 import {
