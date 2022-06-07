@@ -28,7 +28,5 @@ export const editProduct = (productId, product) => {
     ...product,
     id: +productId,
   }
-  console.log("nopues")
-  console.log(data.products[productIndex]);
   return data.products[productIndex];
 }
