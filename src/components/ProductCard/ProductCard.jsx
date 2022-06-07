@@ -21,20 +21,22 @@ export function ProductCard({
   description,
   price,
   quantity,
+  showAddToCart = true,
+  showOwner = true,
 }) {
   const nameOfUser = getUserById(userId)?.name;
 
   return (
     <Card sx={{ maxWidth: 345, height: 1 }}>
       <Link to={"/products/" + id}>
-        <CardHeader
+        {showOwner && <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
               {nameOfUser?.charAt(0).toUpperCase()}
             </Avatar>
           }
           title={nameOfUser}
-        />
+        />}
         <CardMedia component="img" image={image} alt="Paella dish" />
       </Link>
       <CardContent>
@@ -47,15 +49,15 @@ export function ProductCard({
         <Typography variant="body2" sx={{ mt: 3 }}>
           Precio: ${price}
         </Typography>
-        <Typography variant="body2">Cantidad disponible: {quantity}</Typography>
+        <Typography variant="body2">Cantidad: {quantity}</Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton
+        {showAddToCart && <IconButton
           aria-label="Agregar al carrito"
           onClick={() => addProductToCart(getCurrentUser().id, +id)}
         >
           <CartIcon />
-        </IconButton>
+        </IconButton>}
       </CardActions>
     </Card>
   );
