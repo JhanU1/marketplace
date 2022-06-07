@@ -15,7 +15,6 @@ import {
 function App() {
   const isLogged = !!getCurrentUser();
 
-  console.log(isLogged)
   return (
     <BrowserRouter>
       <Routes>
@@ -26,7 +25,7 @@ function App() {
         <Route path="/products" element={<ProductsGrid />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
 
-        <Route path="/" element={<Navigate to="login" replace />} />
+        <Route path="/" element={<Navigate to={isLogged ? "/products" : "/login"} replace />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </BrowserRouter>

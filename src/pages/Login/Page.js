@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { login } from "../../utils/auth.js";
+import { useNavigate } from 'react-router-dom';
 
 const Page = () => {
   const [values, setValues] = React.useState({
@@ -19,10 +20,12 @@ const Page = () => {
     password: "",
     showPassword: false
   });
+  const navigate = useNavigate();
 
   const actionButton = () => {
     const response = login(values.username, values.password);
     if (response) {
+      navigate("/products");
     } else {
       alert("Usuario o contraseña incorrectos");
     }
@@ -116,7 +119,6 @@ const Page = () => {
             </FormControl>
             <div>
               <Button
-                href="#text-buttons"
                 variant="contained"
                 onClick={actionButton}
               >
