@@ -18,29 +18,29 @@ export default function Cart() {
   return (
     <div>
       <Navbar />
-      <h1>Cart</h1>
-      <hr />
-      <div>
-        {products.map(item => (
-          <div key={item.id}>
-            <ProductCard {...item} showAddToCart={false} showOwner={false} />
-            <hr />
-          </div>
-        ))}
-      </div>
-      {/* show total */}
-      <h3>Total: ${cartTotal}</h3>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          // TODO: add pasarela de pagos
-          buyCart(user.id);
-          alert('Pago realizado')
-        }}
-      >
-        Pagar
-      </Button>
+        <h1>Cart</h1>
+        <hr />
+        <div>
+          {products.map(item => (
+            <div key={item.id}>
+              <ProductCard {...item} showAddToCart={false} showOwner={false}/>
+              <hr />
+            </div>
+          ))}
+        </div>
+        {/* show total */}
+        <h3>Total: ${cartTotal}</h3>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            // TODO: add pasarela de pagos
+            buyCart(user.id);
+            alert('Pago realizado')
+          }}
+        >
+          Pagar
+        </Button>
     </div>
   );
 }

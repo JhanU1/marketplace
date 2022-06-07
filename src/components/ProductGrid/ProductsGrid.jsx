@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { ProductSearch } from "../ProductSearch/ProductSearch";
 import { ProductCard } from "../ProductCard/ProductCard";
-import { Pagination } from "../Pagination";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styles from "./ProductsGrid.module.css";
 import Navbar from "../Navbar";
 import { getAllProducts, getProductsBySearch } from "../../utils/products";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 export default function ProductsGrid() {
   const [products, setProducts] = useState([]);
@@ -19,7 +20,6 @@ export default function ProductsGrid() {
     if (!search) {
       setProducts(getAllProducts());
     } else {
-      console.log(search);
       setProducts(getProductsBySearch(search));
     }
   }, [search]);
@@ -31,27 +31,21 @@ export default function ProductsGrid() {
     indexOfLastProduct
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (event, pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
       <Navbar />
-      <header>
-        <Link to="/products">
-          <h1 className={styles.title}>Catalogo</h1>
-        </Link>
-      </header>
-      <ProductSearch />
       <ul className={styles.productsGrid}>
         {currentProducts.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </ul>
-      <Pagination
-        productsPerPage={productsPerPage}
-        totalProducts={products.length}
-        paginate={paginate}
-      />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Stack spacing={2}>
+         <Pagination count={Math.ceil(products.length/productsPerPage)} variant="outlined" shape="rounded" page={currentPage} onChange={paginate}/>
+        </Stack>
+      </Box>
     </div>
   );
 }

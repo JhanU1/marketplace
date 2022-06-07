@@ -4,15 +4,15 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { getCurrentUser } from "../../utils/auth";
+import { useNavigate, Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { getCurrentUser } from "../../utils/auth";
-import { useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import {logout} from "../../utils/auth.js";
+import { ProductSearch } from "../ProductSearch/ProductSearch";
+import {logout} from "../../utils/auth";
 
 export default function Navbar() {
   const auth = getCurrentUser();
@@ -33,19 +33,12 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "green" }}>
+      <AppBar position="static" sx={{ bgcolor: "gray" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Productos
+            <Link to="/products">
+              Productos
+            </Link>            
           </Typography>
           {!!auth && (
             <div>

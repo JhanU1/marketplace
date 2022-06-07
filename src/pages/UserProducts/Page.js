@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import { ProductSearch } from "../ProductSearch/ProductSearch";
 import SellerProduct from "../../components/SelleProduct";
-import { Pagination } from "../Pagination";
 import { useLocation, Link } from "react-router-dom";
-import styles from "./style.css";
-import Navbar from "../Navbar";
+import styles from "./ProductsGrid.module.css";
+import Navbar from "../../components/Navbar";
 import { getProductsByUserId, getSellerUsers } from "../../utils/master.js";
 import { useParams } from "react-router";
+import { Pagination,Stack } from "@mui/material";
+import Box from "@mui/material/Box";
 
-export default function Page({ user_id }) {
-  if (!user_id) {
-     user_id  = useParams();
-  }
+
+
+export default function Page() {
+
+     const {user_id}  = useParams();
+  
   const [products, setProducts] = useState(getProductsByUserId(user_id));
   const [currentPage, setCurrentPage] = useState([1]);
   const [productsPerPage] = useState([10]);
-
+console.log(products);
   const location = useLocation();
   const search = location.search.split("=")[1];
   const filterProducts = (search) => {
@@ -45,22 +47,16 @@ export default function Page({ user_id }) {
   return (
     <div>
       <Navbar />
-      <header>
-        <Link to="/products">
-          <h1 className={styles.title}>Productos del Vendedor</h1>
-        </Link>
-      </header>
-      <ProductSearch />
       <ul className={styles.productsGrid}>
-        {currentProducts.map((product,index) => (
-          <SellerProduct key={index} {...product} />
+        {currentProducts.map((product) => (
+          <SellerProduct key={product.id} {...product} />
         ))}
       </ul>
-      <Pagination
-        productsPerPage={productsPerPage}
-        totalProducts={products.length}
-        paginate={paginate}
-      />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Stack spacing={2}>
+         <Pagination count={Math.ceil(products.length/productsPerPage)} variant="outlined" shape="rounded" page={currentPage} onChange={paginate}/>
+        </Stack>
+      </Box>
     </div>
   );
 }
