@@ -26,7 +26,10 @@ const Page = () => {
     type: "buyer",
   });
 
-  const userTypes = ["buyer", "seller"];
+  const userTypes = [
+    { value: "buyer", label: "Comprador" },
+    { value: "seller", label: "Vendedor" },
+  ];
 
   const actionButton = () => {
     const response = register(
@@ -168,7 +171,7 @@ const Page = () => {
                 label="Confirmar Contraseña"
               />
             </FormControl>
-            <Box sx={{mb:2}}>
+            <Box sx={{ mb: 3 }}>
               <TextField
                 id="standard-select-currency"
                 select
@@ -178,9 +181,9 @@ const Page = () => {
                 helperText="Selecciona el tipo de usuario"
                 variant="standard"
               >
-                {userTypes.map((option) => (
-                  <MenuItem key={option} value={option}>
-                    {option}
+                {userTypes.map(({ value, label }) => (
+                  <MenuItem key={value} value={value}>
+                    {label}
                   </MenuItem>
                 ))}
               </TextField>
@@ -204,7 +207,7 @@ const Page = () => {
                 py: 3,
               }}
             >
-              <p>Ya tengo una cuenta</p>
+              <Button>Ya tengo una cuenta</Button>
             </Box>
           </Box>
         </Box>
