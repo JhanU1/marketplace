@@ -25,3 +25,10 @@ export const addProductToCart = (userId, productId) => {
     });
   }
 }
+
+export const buyCart = (userId) => {
+  const cart = getCart(userId);
+  cart.products = [];
+  cart.quantity = 0;
+  return cart;
+}

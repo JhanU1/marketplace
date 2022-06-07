@@ -1,5 +1,5 @@
 import { getCurrentUser } from '../../utils/auth';
-import { getCart } from '../../utils/carts';
+import { buyCart, getCart } from '../../utils/carts';
 import { getProductById } from '../../utils/products';
 import Navbar from '../Navbar';
 import { ProductCard } from "../ProductCard/ProductCard";
@@ -33,7 +33,11 @@ export default function Cart() {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => alert('Pago realizado')}
+        onClick={() => {
+          // TODO: add pasarela de pagos
+          buyCart(user.id);
+          alert('Pago realizado')
+        }}
       >
         Pagar
       </Button>
