@@ -18,7 +18,7 @@ const Page = () => {
   const [values, setValues] = React.useState({
     username: "",
     password: "",
-    showPassword: false
+    showPassword: false,
   });
   const navigate = useNavigate();
 
@@ -121,6 +121,7 @@ const Page = () => {
               <Button
                 variant="contained"
                 onClick={actionButton}
+                sx={{ bgcolor: colorBgLogin }}
               >
                 Iniciar sesión
               </Button>
