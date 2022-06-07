@@ -1,17 +1,11 @@
 import Login from "./pages/Login";
 import ProductsGrid from "./components/ProductGrid/ProductsGrid";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
-import styles from "./App.module.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Link to="/products">
-          <h1 className={styles.title}>Catalogo</h1>
-        </Link>
-      </header>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/products" element={<ProductsGrid />} />
