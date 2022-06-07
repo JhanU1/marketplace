@@ -121,15 +121,20 @@ const Page = () => {
               <Button
                 variant="contained"
                 onClick={actionButton}
-             
               >
                 Iniciar sesión
               </Button>
             </div>
 
-            <Box alignItems="flex-center" sx={{ color: "primary.main", py: 3 }}>
+            <Button
+              variant="contained"
+              onClick={() => navigate("/register")}
+              sx={{
+                mt: 4,
+              }}
+            >
               Crear una nueva cuenta
-            </Box>
+            </Button>
           </Box>
         </Box>
       </Grid>

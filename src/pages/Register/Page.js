@@ -15,8 +15,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { grey } from "@mui/material/colors";
 import { register } from "../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 const Page = () => {
+  const navigate = useNavigate();
   const [values, setValues] = React.useState({
     username: "",
     password: "",
@@ -207,12 +209,14 @@ const Page = () => {
                 py: 3,
               }}
             >
-              <Button>Ya tengo una cuenta</Button>
-            </Box>
+              <Button
+                onClick={() => navigate("/login")}
+              >Ya tengo una cuenta</Button>
           </Box>
         </Box>
-      </Grid>
+      </Box>
     </Grid>
+    </Grid >
   );
 };
 
