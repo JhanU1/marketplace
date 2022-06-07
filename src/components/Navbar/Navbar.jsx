@@ -38,7 +38,7 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link to="/products">
               Productos
-            </Link>            
+            </Link>
           </Typography>
           {!!auth && (
             <div>
@@ -82,7 +82,7 @@ export default function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {auth.type==="seller" && (<MenuItem onClick={handleClose}>Mis Productos</MenuItem>) }
+                {auth.type==="seller" && (<MenuItem onClick={() => navigate(`/products/user/${auth.id}`)}>Mis Productos</MenuItem>) }
                 {auth.type==="admin" &&  (<MenuItem onClick={() => navigate("/master")}>Maestro de Productos</MenuItem>)}
                 <MenuItem onClick={handleLogout}>Cerrar Sesión</MenuItem>
               </Menu>
